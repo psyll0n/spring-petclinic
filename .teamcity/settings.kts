@@ -59,9 +59,10 @@ object Build : BuildType({
         }
     }
 
-
     features {
         perfmon {
+        }
+        swabra {
         }
     }
 })
