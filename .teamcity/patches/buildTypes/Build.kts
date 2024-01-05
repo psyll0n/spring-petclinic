@@ -1,7 +1,6 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.*
-import jetbrains.buildServer.configs.kotlin.buildFeatures.Swabra
 import jetbrains.buildServer.configs.kotlin.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.ui.*
 
@@ -14,7 +13,6 @@ changeBuildType(RelativeId("Build")) {
     features {
         add {
             swabra {
-                filesCleanup = Swabra.FilesCleanup.AFTER_BUILD
                 forceCleanCheckout = true
             }
         }
