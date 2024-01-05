@@ -28,12 +28,13 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 project {
-
+    vcsRoot(PetclinicVcs)
     buildType(Build)
 }
 
 object Build : BuildType({
     name = "Build"
+    artifactRules = "target/*jar"
 
     vcs {
         root(DslContext.settingsRoot)
@@ -52,6 +53,11 @@ object Build : BuildType({
             groupCheckinsByCommitter = true
         }
     }
+
+    object PetclinicVcs : GitVcsRoot({
+    name = "PetclinicVcs"
+    url = "git@github.com:psyll0n/spring-petclinic.git"
+    })
 
     features {
         perfmon {
