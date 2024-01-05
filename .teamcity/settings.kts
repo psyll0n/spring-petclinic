@@ -37,6 +37,12 @@ object Build : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+        cgeckoutMode = CheckoutMode.ON_AGENT
+        checkoutDir = "sources"
+        cleanCheckout =  true
+        showDependencyChanges = true
+        excludeDefaultBranchChanges = true
+        buildDefaultBranch = true
     }
 
     steps {
