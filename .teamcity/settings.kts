@@ -1,9 +1,7 @@
-import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
-import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
-import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
+import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -27,42 +25,36 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2018.2"
+version = "2023.11"
 
 project {
-    vcsRoot(PetclinicVcs)
+
     buildType(Build)
 }
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "target/*jar"
 
     vcs {
-        root(PetclinicVcs)
+        root(DslContext.settingsRoot)
     }
+
     steps {
         maven {
+            id = "Maven2"
             goals = "clean package"
-            dockerImage = "maven:3.6.0-jdk-8"
+            runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
     }
+
     triggers {
         vcs {
             groupCheckinsByCommitter = true
         }
     }
-})
 
-object PetclinicVcs : GitVcsRoot({
-    name = "PetclinicVcs"
-    url = "https://github.com/spring-projects/spring-petclinic.git"
-})
-
-
-fun wrapWithFeature(buildType: BuildType, featureBlock: BuildFeatures.() -> Unit): BuildType {
-    buildType.features {
-        featureBlock()
+    features {
+        perfmon {
+        }
     }
-    return buildType
-}
+})
