@@ -28,7 +28,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2023.11"
 
 project {
-    vcsRoot(PetclinicVcs)
     buildType(Build)
 }
 
@@ -54,10 +53,6 @@ object Build : BuildType({
         }
     }
 
-    object PetclinicVcs : GitVcsRoot({
-    name = "PetclinicVcs"
-    url = "git@github.com:psyll0n/spring-petclinic.git"
-    })
 
     features {
         perfmon {
