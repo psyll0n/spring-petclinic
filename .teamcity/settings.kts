@@ -40,7 +40,7 @@ object Build : BuildType({
         cgeckoutMode = CheckoutMode.ON_AGENT
         checkoutDir = "sources"
         cleanCheckout =  true
-        showDependencyChanges = true
+        showDependenciesChanges = true
         excludeDefaultBranchChanges = true
         buildDefaultBranch = true
     }
